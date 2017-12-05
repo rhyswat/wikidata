@@ -48,30 +48,28 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: "style-loader!css-loader"
+                loader: 'style-loader!css-loader'
             },
             {
                 test: /\.(jpg|png)$/,
-                loader: 'file-loader?name=../assets/[name].[ext]'
+                loader: 'file-loader?name=../vendor/images/[name].[ext]'
             },
-
-            /* fonts for bootstrap */
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=../fonts/[name].[ext]'
+                loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=../vendor/fonts/[name].[ext]'
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=../fonts/[name].[ext]'
+                loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=../vendor/fonts/[name].[ext]'
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file-loader?name=../fonts/[name].[ext]'
+                loader: 'file-loader?name=../vendor/fonts/[name].[ext]'
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=../fonts/[name].[ext]'
-            }
+                loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=../vendor/fonts/[name].[ext]'
+            },
         ]
     },
     plugins: [

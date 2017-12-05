@@ -6,25 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Messin'</title>
+    <title>WikiData + OpenStreetMap</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-        crossorigin="" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
-    <div class="map-container">
-        <div id="map" class="map-frame">
+    <div class="main-app">
+        <div>
+            <h2>Wikidata + OpenStreetMap</h2>
+            <p>Yn defnyddio
+                <a href="https://www.wikidata.org/wiki/Q42310659">WikiData</a> 5ed Cynulliad Cenedlaethol Cymru</p>
+            <p>a
+                <a href="http://leafletjs.com/">leaflet</a> i lunio mapiau
+                <a href="https://www.openstreetmap.org">OpenStreetMap</a>
+            </p>
 
         </div>
-    </div>
-    <div>
-        <img class="wikidata-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Wikidata_stamp.png" alt="wikidata logo">
+        <div class="map-container">
+            <div id="map" class="map-frame">
+            </div>
+        </div>
+        <div>
+            <img class="wikidata-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Wikidata_stamp.png" alt="wikidata logo">
+        </div>
     </div>
 
-    <!-- last thing, initialisation script -->
     <script src="js/app.bundle.js" type="text/javascript" charset="utf-8">
     </script>
 

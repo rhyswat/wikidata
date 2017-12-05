@@ -8,6 +8,7 @@
   "dependencies": {
     "async": "^2.6.0",
     "babel-polyfill": "^6.23.0",
+    "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
     "leaflet": "^1.2.0",
     "underscore": "^1.8.3",
@@ -26,13 +27,12 @@
     "glob": "^7.1.2",
     "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
-    "url-loader": "^0.5.9",
+    "url-loader": "^0.6.2",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0"
-
   },
   "scripts": {
-    "prestart": "webpack -d",
+    "prestart": "rm -rf www/vendor && webpack -d",
     "start": "webpack-dev-server"
   },
   "babel": {
