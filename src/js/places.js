@@ -7,11 +7,6 @@ const _ = require('underscore');
 const assembly = 'Member_of_the_5th_National_Assembly_for_Wales';
 const wdq = 'Q42310659';
 
-// let dither = function (value) {
-//     let r = 0.005 * (-0.5 + Math.random());
-//     return value + r;
-// }
-
 let getPoints = function (applicationCallback) {
 
     const query = `
