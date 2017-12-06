@@ -3,7 +3,9 @@ WikiData + OpenStreetMap
 
 # Rhedeg / get running
 
- $ npm install
- $ npm start
+```
+$ npm install
+$ npm start
+```
 
-Porwch at rhywle:8888
+Porwch at `http://<rhywle>:8888`
