@@ -58,5 +58,6 @@ typings/
 .env
 
 # build outputs
-www/js/app.bundle.js*
+www/js
+www/style
 www/vendor

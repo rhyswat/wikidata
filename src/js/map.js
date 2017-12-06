@@ -6,15 +6,16 @@ const Map = function (divId) {
 }
 
 Map.prototype.initialise = function () {
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    let mapOptions = {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
+    }
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', mapOptions).addTo(this.map);
 };
 
 // pass in a BirthLocation object
 Map.prototype.addMarker = function (birthLocation) {
     let marker = L.marker([birthLocation.lat, birthLocation.lon]).addTo(this.map);
-    marker.bindPopup(birthLocation.render()).openPopup();
+    marker.bindPopup(birthLocation.render());
 };
 
 // exports

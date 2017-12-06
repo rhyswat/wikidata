@@ -1,7 +1,9 @@
 require('babel-polyfill');
 
+
 require('./leaflet'); // before bootstrap
 require('bootstrap/dist/css/bootstrap.min.css');
+require('../style/style.scss')
 
 const Map = require('./map');
 const WikidatatAPI = require('./wikidataAPI');

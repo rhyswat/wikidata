@@ -16,6 +16,13 @@ const webpack = require('webpack');
 const SRC = path.resolve(__dirname, 'src');
 const WWW = path.resolve(__dirname, 'www');
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const extractSass = new ExtractTextPlugin({
+    filename: "../style/[name].css",
+    disable: process.env.NODE_ENV === "development"
+});
+
 // run on our LAN ip address to access from other machines
 var networkAddressOrNone = function () {
     var interfaces = os.networkInterfaces();
@@ -40,8 +47,7 @@ module.exports = {
     },
     devtool: 'source-map',
     module: {
-        loaders: [
-            {
+        loaders: [{
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
@@ -49,6 +55,18 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader'
+            },
+            {
+                test: /\.scss$/,
+                use: extractSass.extract({
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "sass-loader"
+                    }],
+                    // use style-loader in development
+                    fallback: "style-loader"
+                })
             },
             {
                 test: /\.(jpg|png)$/,
@@ -79,12 +97,13 @@ module.exports = {
             jquery: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
-        })
+        }),
+        extractSass
     ],
     devServer: {
         "hot": true,
         "port": 4444,
-        // "host": networkAddressOrNone(),
+        "host": networkAddressOrNone(),
         "contentBase": "www/"
     }
 }
