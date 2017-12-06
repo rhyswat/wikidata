@@ -16,24 +16,21 @@ const webpack = require('webpack');
 const SRC = path.resolve(__dirname, 'src');
 const WWW = path.resolve(__dirname, 'www');
 
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-const extractSass = new ExtractTextPlugin({
-    filename: "../style/[name].css",
-    disable: process.env.NODE_ENV === "development"
-});
-
 // run on our LAN ip address to access from other machines
 var networkAddressOrNone = function () {
     var interfaces = os.networkInterfaces();
     var address = '127.0.0.1';
-    for (var k in interfaces) {
-        for (var k2 in interfaces[k]) {
-            var address = interfaces[k][k2];
-            if (/^192/.test(address.address)) {
-                return address.address;
+    try {
+        for (var k in interfaces) {
+            for (var k2 in interfaces[k]) {
+                var address = interfaces[k][k2];
+                if (/^192/.test(address.address)) {
+                    return address.address;
+                }
             }
         }
+    } catch (e) {
+        console.log('tough, you are on ' + address);
     }
 
     return address;
@@ -58,15 +55,13 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: extractSass.extract({
-                    use: [{
-                        loader: "css-loader"
-                    }, {
-                        loader: "sass-loader"
-                    }],
-                    // use style-loader in development
-                    fallback: "style-loader"
-                })
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "sass-loader" // compiles Sass to CSS
+                }]
             },
             {
                 test: /\.(jpg|png)$/,
@@ -97,12 +92,11 @@ module.exports = {
             jquery: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
-        }),
-        extractSass
+        })
     ],
     devServer: {
         "hot": true,
-        "port": 4444,
+        "port": 8888,
         "host": networkAddressOrNone(),
         "contentBase": "www/"
     }

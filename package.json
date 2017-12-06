@@ -35,7 +35,7 @@
     "webpack-dev-server": "^2.5.0"
   },
   "scripts": {
-    "prestart": "rm -rf www/vendor && webpack -d",
+    "prestart": "rm -rf www/vendor www/js www/style && webpack -d",
     "start": "webpack-dev-server"
   },
   "babel": {
