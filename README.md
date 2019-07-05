@@ -4,8 +4,8 @@ WikiData + OpenStreetMap
 # Rhedeg / get running
 
 ```
-$ npm install
-$ npm start
+$ yarn
+$ yarn start
 ```
 
 Porwch at `http://<rhywle>:8888`

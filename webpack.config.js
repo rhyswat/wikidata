@@ -7,17 +7,19 @@
     and transpiles js to a low common denominator for IE
      and puts jquery/$ in global scope
       and configures the dev server
-*/
+      */
 
 const path = require('path');
 const os = require('os');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SRC = path.resolve(__dirname, 'src');
 const WWW = path.resolve(__dirname, 'www');
 
 // run on our LAN ip address to access from other machines
-var networkAddressOrNone = function () {
+var networkAddressOrNone = function() {
     var interfaces = os.networkInterfaces();
     var address = '127.0.0.1';
     try {
@@ -37,52 +39,37 @@ var networkAddressOrNone = function () {
 }
 
 module.exports = {
-    entry: path.join(SRC, 'js', 'app.js'),
+    entry: path.resolve(__dirname, 'src', 'js', 'app.js'),
     output: {
-        path: path.join(WWW, 'js'),
-        filename: 'app.bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        filename: 'app.js',
     },
     devtool: 'source-map',
     module: {
-        loaders: [{
+        rules: [{
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
             },
             {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            },
-            {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 use: [{
-                    loader: "style-loader" // creates style nodes from JS strings
-                }, {
-                    loader: "css-loader" // translates CSS into CommonJS
-                }, {
-                    loader: "sass-loader" // compiles Sass to CSS
-                }]
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {},
+                    },
+                    'css-loader',
+                    'sass-loader'
+                ]
             },
             {
-                test: /\.(jpg|png)$/,
-                loader: 'file-loader?name=../vendor/images/[name].[ext]'
-            },
-            {
-                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=../vendor/fonts/[name].[ext]'
-            },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=../vendor/fonts/[name].[ext]'
-            },
-            {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file-loader?name=../vendor/fonts/[name].[ext]'
-            },
-            {
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=../vendor/fonts/[name].[ext]'
-            },
+                test: /\.(png|jpe?g|gif)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                    }
+                }],
+            }
         ]
     },
     plugins: [
@@ -92,12 +79,18 @@ module.exports = {
             jquery: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html'
         })
     ],
     devServer: {
         "hot": true,
         "port": 8888,
         "host": networkAddressOrNone(),
-        "contentBase": "www/"
+        "contentBase": "dist/"
     }
 }

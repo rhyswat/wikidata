@@ -1,9 +1,6 @@
-require('babel-polyfill');
-
-
-require('./leaflet'); // before bootstrap
+require('./leaflet'); // pull in all leaflet assets before bootstrap
 require('bootstrap/dist/css/bootstrap.min.css');
-require('../style/style.scss')
+require('../style/style.scss');
 
 const Map = require('./map');
 const WikidatatAPI = require('./wikidataAPI');
@@ -19,7 +16,7 @@ const app = {
       points.forEach(birthLocation => {
         map.addMarker(birthLocation);
       });
-    })
+    });
   }
 };
 
